@@ -20,11 +20,11 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg); color: var(--text-primary); line-height: 1.6; scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text-primary); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
         .accent { color: var(--accent); }
 
-        /* Navbar */
+        /* Navigation */
         nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 0; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
@@ -38,44 +38,32 @@
         .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
         .hero p { color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin-bottom: 2.5rem; }
         
-        /* Image Control - تعديل وشك هنا */
+        /* Image Alignment */
         .hero-image { flex: 0.8; display: flex; justify-content: center; position: relative; }
         .hero-image img { 
-            width: 380px; 
-            height: 380px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            /* التعديل اللي بيظبط الوش: center تعني العرض، و 20% تعني الطول (صغر الرقم يرفع الصورة لفوق) */
-            object-position: center 15%; 
+            width: 380px; height: 380px; border-radius: 50%; object-fit: cover; 
+            object-position: center 10%; /* بتنزل الصورة عشان وشك يبان */
             border: 3px solid var(--accent); 
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.25); 
             z-index: 2; 
         }
         .hero-image::after { content: ''; position: absolute; inset: -15px; background: var(--accent); filter: blur(50px); opacity: 0.1; border-radius: 50%; z-index: 1; }
 
-        /* Cards & Grids */
+        /* Shared Section Styles */
         section { padding: 100px 0; }
         .section-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 3.5rem; text-align: center; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .glass-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 28px; padding: 2.5rem; transition: var(--transition); }
         .glass-card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255,255,255,0.02); }
-        .glass-card h3 { margin-bottom: 1rem; font-size: 1.4rem; }
 
-        /* Buttons */
-        .btn { padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; transition: var(--transition); border: none; cursor: pointer; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2); }
+        /* Buttons & Forms */
+        .btn { padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; transition: var(--transition); border: none; cursor: pointer; background: var(--accent); color: white; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2); }
+        input, textarea { width: 100%; padding: 1.2rem; background: #111; border: 1px solid var(--border); border-radius: 16px; color: white; margin-bottom: 1.2rem; outline: none; }
 
-        /* Contact Form */
-        .form-card { max-width: 600px; margin: 0 auto; }
-        input, select { width: 100%; padding: 1.2rem; background: #111; border: 1px solid var(--border); border-radius: 16px; color: white; margin-bottom: 1.2rem; outline: none; }
-        input:focus { border-color: var(--accent); }
-
-        /* Responsive */
         @media (max-width: 992px) {
             .hero-layout { flex-direction: column-reverse; text-align: center; gap: 30px; }
-            .hero-image img { width: 300px; height: 300px; }
-            .hero-text { flex: 1; }
+            .hero-image img { width: 280px; height: 280px; }
         }
     </style>
 </head>
@@ -87,7 +75,6 @@
             <div class="nav-links">
                 <a href="#projects">Projects</a>
                 <a href="#services">Services</a>
-                <a href="#blog">Blog</a>
                 <a href="#contact" class="accent">Hire Me</a>
             </div>
         </div>
@@ -96,9 +83,9 @@
     <section class="hero">
         <div class="container hero-layout">
             <div class="hero-text">
-                <h1>Scalable <span class="accent">Architecture</span> & Full Stack Systems</h1>
-                <p>Specialized in building high-performance Backend solutions with .NET Core and clean, maintainable codebases.</p>
-                <a href="#contact" class="btn btn-primary">Start a Project</a>
+                <h1>Crafting <span class="accent">High-Performance</span> Full Stack Systems</h1>
+                <p>Professional .NET Developer focused on building scalable, clean, and secure web applications that drive business growth.</p>
+                <a href="#contact" class="btn">Start a Project</a>
             </div>
             <div class="hero-image">
                 <img src="profile.jpg" alt="Mazen Siam">
@@ -111,19 +98,14 @@
             <h2 class="section-title">Professional <span class="accent">Services</span></h2>
             <div class="grid">
                 <div class="glass-card">
-                    <i data-lucide="code-2" class="accent"></i>
-                    <h3>Full Stack Development</h3>
-                    <p>End-to-end web applications built with C#, .NET Core, and modern JavaScript frameworks.</p>
+                    <i data-lucide="layers" class="accent"></i>
+                    <h3 style="margin-top: 1rem;">Full Stack Development</h3>
+                    <p>End-to-end web applications built with C#, .NET Core, and modern Frontend technologies.</p>
                 </div>
                 <div class="glass-card">
                     <i data-lucide="database" class="accent"></i>
-                    <h3>Database Design</h3>
-                    <p>Relational database modeling and SQL Server optimization for high-load applications.</p>
-                </div>
-                <div class="glass-card">
-                    <i data-lucide="cpu" class="accent"></i>
-                    <h3>System Architecture</h3>
-                    <p>Designing Clean Architecture and RESTful APIs that are secure and easy to scale.</p>
+                    <h3 style="margin-top: 1rem;">Backend Engineering</h3>
+                    <p>Designing secure, scalable RESTful APIs with Clean Architecture and SQL optimization.</p>
                 </div>
             </div>
         </div>
@@ -134,72 +116,37 @@
         <div class="grid">
             <div class="glass-card">
                 <h3>Enterprise ERP Solution</h3>
-                <p>A robust resource management platform using .NET Core and SQL Server for enterprise operations.</p>
+                <p>A robust resource management platform designed for efficiency and high-load operations.</p>
             </div>
             <div class="glass-card">
-                <h3>E-Commerce Web API</h3>
-                <p>High-performance API featuring JWT security, payment integration, and complex order logic.</p>
-            </div>
-            <div class="glass-card">
-                <h3>Automation Service</h3>
-                <p>Background processing engine designed for real-time data synchronization and task scheduling.</p>
+                <h3>Scalable Web API</h3>
+                <p>High-performance backend system featuring JWT security and complex business logic.</p>
             </div>
         </div>
     </section>
 
-    <section id="blog" style="background: #080808;">
-        <div class="container">
-            <h2 class="section-title">Technical <span class="accent">Blog</span></h2>
-            <div class="grid">
-                <div class="glass-card">
-                    <span class="accent" style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Full Stack</span>
-                    <h3 style="margin-top: 0.5rem;">The Future of .NET Core in 2026</h3>
-                    <p>Why C# remains the industry leader for enterprise-grade web applications.</p>
-                </div>
-                <div class="glass-card">
-                    <span class="accent" style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Automation</span>
-                    <h3 style="margin-top: 0.5rem;">Leveraging NLP in Modern Apps</h3>
-                    <p>Practical ways to integrate language processing tools into your Full Stack workflow.</p>
-                </div>
-            </div>
+    <section id="contact" class="container" style="max-width: 700px;">
+        <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+        <div class="glass-card">
+            <input type="text" id="name" placeholder="Your Name">
+            <textarea id="message" rows="4" placeholder="Your Message"></textarea>
+            <button class="btn" style="width: 100%;" onclick="sendMail()">Send Message</button>
         </div>
     </section>
 
-    <section id="contact" class="container">
-        <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
-        <div class="glass-card form-card">
-            <input type="text" id="userName" placeholder="Your Name">
-            <select id="projectType">
-                <option value="Full Stack Project">Full Stack Project</option>
-                <option value="Backend Development">Backend / API Development</option>
-                <option value="System Design">System Architecture</option>
-            </select>
-            <input type="date" id="prefDate">
-            <button class="btn btn-primary" style="width: 100%;" onclick="sendMail()">Schedule Meeting</button>
-        </div>
-    </section>
-
-    <footer style="padding: 4rem 0; text-align: center; color: var(--text-secondary); border-top: 1px solid var(--border);">
-        <p>&copy; 2026 Mazen Siam | Built with .NET Professionalism</p>
-        <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem;">
-            <a href="https://github.com/Mazen-Siam" target="_blank" style="color: inherit;"><i data-lucide="github"></i></a>
-            <a href="https://linkedin.com/in/mazen-siam/" target="_blank" style="color: inherit;"><i data-lucide="linkedin"></i></a>
-        </div>
+    <footer style="padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary);">
+        <p>&copy; 2026 Mazen Siam | Full Stack .NET Developer</p>
     </footer>
 
     <script>
         lucide.createIcons();
         function sendMail() {
-            const name = document.getElementById('userName').value;
-            const type = document.getElementById('projectType').value;
-            const date = document.getElementById('prefDate').value;
-            const email = "mazentareksiam@gmail.com"; // حط إيميلك هنا يا مازن
-            
-            const subject = encodeURIComponent(`Freelancing Work - ${type}`);
-            const body = encodeURIComponent(`Hello Mazen,\n\nI'm ${name}.\nI'd like to discuss a ${type} project.\nProposed Date: ${date}`);
+            const name = document.getElementById('name').value;
+            const email = "mazentareksiam@gmail.com"; 
+            const subject = encodeURIComponent("Inquiry from Portfolio");
+            const body = encodeURIComponent(`Hi Mazen, I'm ${name}. I'd like to discuss a project with you.`);
             window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
         }
     </script>
 </body>
-
 </html>
