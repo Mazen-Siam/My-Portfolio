@@ -7,62 +7,57 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #050505;
-            --card-bg: #0c0c0c;
+            --bg: #030303;
+            --card-bg: #0a0a0a;
             --accent: #3b82f6;
             --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --border: rgba(255, 255, 255, 0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text-secondary: #888888;
+            --border: rgba(255, 255, 255, 0.05);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg); color: var(--text-primary); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
         .accent { color: var(--accent); }
 
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 0; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 0; background: rgba(3, 3, 3, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.85rem; font-weight: 600; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-primary); }
 
-        /* Hero Section */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #111827 0%, #050505 100%); padding-top: 80px; }
-        .hero-layout { display: flex; align-items: center; justify-content: space-between; gap: 50px; text-align: left; width: 100%; }
-        .hero-text { flex: 1.2; }
-        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
-        .hero p { color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin-bottom: 2.5rem; }
+        /* Hero */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at top right, #0a1120 0%, #030303 100%); }
+        .hero-layout { display: flex; align-items: center; justify-content: space-between; gap: 40px; width: 100%; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 500px; margin-bottom: 2.5rem; }
         
-        /* Image Alignment */
-        .hero-image { flex: 0.8; display: flex; justify-content: center; position: relative; }
         .hero-image img { 
-            width: 380px; height: 380px; border-radius: 50%; object-fit: cover; 
-            object-position: center 10%; /* بتنزل الصورة عشان وشك يبان */
-            border: 3px solid var(--accent); 
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.25); 
-            z-index: 2; 
+            width: 360px; height: 360px; border-radius: 40px; object-fit: cover; 
+            object-position: center 10%; border: 1px solid var(--border); 
         }
-        .hero-image::after { content: ''; position: absolute; inset: -15px; background: var(--accent); filter: blur(50px); opacity: 0.1; border-radius: 50%; z-index: 1; }
 
-        /* Shared Section Styles */
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 800; }
+        .about-content p { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem; }
+
+        /* Cards */
         section { padding: 100px 0; }
-        .section-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 3.5rem; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .glass-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 28px; padding: 2.5rem; transition: var(--transition); }
-        .glass-card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255,255,255,0.02); }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .glass-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 3rem 2rem; transition: var(--transition); }
+        .glass-card:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-5px); }
 
-        /* Buttons & Forms */
-        .btn { padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block; transition: var(--transition); border: none; cursor: pointer; background: var(--accent); color: white; }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2); }
-        input, textarea { width: 100%; padding: 1.2rem; background: #111; border: 1px solid var(--border); border-radius: 16px; color: white; margin-bottom: 1.2rem; outline: none; }
+        .btn { padding: 1rem 2rem; border-radius: 12px; text-decoration: none; font-weight: 600; display: inline-block; transition: var(--transition); background: var(--text-primary); color: var(--bg); }
+        .btn:hover { background: var(--accent); color: white; transform: translateY(-3px); }
 
         @media (max-width: 992px) {
-            .hero-layout { flex-direction: column-reverse; text-align: center; gap: 30px; }
+            .hero-layout, .about-grid { flex-direction: column; grid-template-columns: 1fr; text-align: center; }
             .hero-image img { width: 280px; height: 280px; }
         }
     </style>
@@ -71,82 +66,98 @@
 
     <nav>
         <div class="container nav-content">
-            <div class="logo">MAZEN<span class="accent">.SIAM</span></div>
+            <div class="logo">MAZEN<span class="accent">.</span>SIAM</div>
             <div class="nav-links">
-                <a href="#projects">Projects</a>
-                <a href="#services">Services</a>
-                <a href="#contact" class="accent">Hire Me</a>
+                <a href="#about">ABOUT</a>
+                <a href="#projects">PROJECTS</a>
+                <a href="#services">SERVICES</a>
+                <a href="#contact">CONTACT</a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="container hero-layout">
+        <div class="container hero-layout" data-aos="fade-up">
             <div class="hero-text">
-                <h1>Crafting <span class="accent">High-Performance</span> Full Stack Systems</h1>
-                <p>Professional .NET Developer focused on building scalable, clean, and secure web applications that drive business growth.</p>
-                <a href="#contact" class="btn">Start a Project</a>
+                <h1>Building <span class="accent">Modern</span> Full Stack Applications.</h1>
+                <p>Focused on developing fast, reliable, and user-friendly web applications using the .NET Core ecosystem.</p>
+                <a href="#contact" class="btn">HIRE ME</a>
             </div>
-            <div class="hero-image">
+            <div class="hero-image" data-aos="zoom-in">
                 <img src="profile.jpg" alt="Mazen Siam">
             </div>
         </div>
     </section>
 
-    <section id="services" style="background: #080808;">
-        <div class="container">
-            <h2 class="section-title">Professional <span class="accent">Services</span></h2>
-            <div class="grid">
-                <div class="glass-card">
-                    <i data-lucide="layers" class="accent"></i>
-                    <h3 style="margin-top: 1rem;">Full Stack Development</h3>
-                    <p>End-to-end web applications built with C#, .NET Core, and modern Frontend technologies.</p>
+    <section id="about" class="container">
+        <div class="about-grid">
+            <div class="about-content" data-aos="fade-right">
+                <h2>About <span class="accent">Me</span></h2>
+                <p>I am a student at the Faculty of Engineering with a passion for software development. I enjoy the process of turning a blank page into a fully functional application that solves real-world problems.</p>
+                <p>My focus is on mastering .NET technologies to build secure backends and integrating them with clean, responsive frontends.</p>
+                <div style="display: flex; gap: 2rem; margin-top: 2rem;">
+                    <div><h4 class="accent">100%</h4><p style="font-size: 0.8rem;">Dedication</p></div>
+                    <div><h4 class="accent">Fast</h4><p style="font-size: 0.8rem;">Learner</p></div>
                 </div>
-                <div class="glass-card">
-                    <i data-lucide="database" class="accent"></i>
-                    <h3 style="margin-top: 1rem;">Backend Engineering</h3>
-                    <p>Designing secure, scalable RESTful APIs with Clean Architecture and SQL optimization.</p>
+            </div>
+            <div class="glass-card" data-aos="fade-left">
+                <h3 style="margin-bottom: 1rem;">My Toolkit</h3>
+                <ul style="list-style: none; color: var(--text-secondary);">
+                    <li style="margin-bottom: 0.5rem;"><i data-lucide="check" class="accent" style="width: 16px;"></i> C# / .NET Core</li>
+                    <li style="margin-bottom: 0.5rem;"><i data-lucide="check" class="accent" style="width: 16px;"></i> ASP.NET Web APIs</li>
+                    <li style="margin-bottom: 0.5rem;"><i data-lucide="check" class="accent" style="width: 16px;"></i> SQL Server Databases</li>
+                    <li style="margin-bottom: 0.5rem;"><i data-lucide="check" class="accent" style="width: 16px;"></i> HTML, CSS & JavaScript</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background: #050505;">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-right">Services</h2>
+            <div class="grid">
+                <div class="glass-card" data-aos="fade-up">
+                    <i data-lucide="monitor" class="accent"></i>
+                    <h3>Web Development</h3>
+                    <p>Creating responsive and interactive websites tailored to your needs.</p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                    <i data-lucide="server" class="accent"></i>
+                    <h3>Backend Solutions</h3>
+                    <p>Developing robust server-side logic and managing database systems.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="container">
-        <h2 class="section-title">Featured <span class="accent">Work</span></h2>
+        <h2 class="section-title" data-aos="fade-right">Projects</h2>
         <div class="grid">
-            <div class="glass-card">
-                <h3>Enterprise ERP Solution</h3>
-                <p>A robust resource management platform designed for efficiency and high-load operations.</p>
+            <div class="glass-card" data-aos="fade-up">
+                <span class="accent" style="font-size: 0.7rem; font-weight: 800;">E-COMMERCE</span>
+                <h3>Store Platform</h3>
+                <p>A web application for online shopping with product management features.</p>
             </div>
-            <div class="glass-card">
-                <h3>Scalable Web API</h3>
-                <p>High-performance backend system featuring JWT security and complex business logic.</p>
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="accent" style="font-size: 0.7rem; font-weight: 800;">MANAGEMENT</span>
+                <h3>Inventory System</h3>
+                <p>An application to track and manage stock levels effectively.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="container" style="max-width: 700px;">
-        <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
-        <div class="glass-card">
-            <input type="text" id="name" placeholder="Your Name">
-            <textarea id="message" rows="4" placeholder="Your Message"></textarea>
-            <button class="btn" style="width: 100%;" onclick="sendMail()">Send Message</button>
+    <footer id="contact">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Ready to Start?</h2>
+            <a href="mailto:mazentareksiam@gmail.com" class="btn">SEND AN EMAIL</a>
+            <p style="margin-top: 4rem; color: var(--text-secondary); font-size: 0.8rem;">&copy; 2026 MAZEN SIAM.</p>
         </div>
-    </section>
-
-    <footer style="padding: 4rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary);">
-        <p>&copy; 2026 Mazen Siam | Full Stack .NET Developer</p>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         lucide.createIcons();
-        function sendMail() {
-            const name = document.getElementById('name').value;
-            const email = "mazentareksiam@gmail.com"; 
-            const subject = encodeURIComponent("Inquiry from Portfolio");
-            const body = encodeURIComponent(`Hi Mazen, I'm ${name}. I'd like to discuss a project with you.`);
-            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-        }
+        AOS.init({ duration: 1000, once: true });
     </script>
 </body>
 </html>
